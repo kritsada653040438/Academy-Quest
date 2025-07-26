@@ -1,0 +1,10 @@
+<h1 class="text-2xl font-bold mb-4">🎯 My Academy Quest</h1>
+
+<%= turbo_frame_tag "quest_form" do %>
+  <%= render "form", quest: @quest %>
+<% end %>
+
+<div id="quest-list">
+  <%= turbo_stream_from "quests" %>
+  <%= render @quests %>
+</div>

@@ -1,0 +1,33 @@
+<%= turbo_frame_tag dom_id(quest) do %>
+  <div class="flex items-start justify-between bg-white rounded-xl p-4 shadow mb-3">
+
+    <!-- เควสฝั่งซ้าย -->
+    <div class="flex items-start space-x-3">
+      
+
+      <!-- เนื้อหา -->
+      <div>
+        <p class="quest-title font-bold <%= 'line-through text-gray-400' if quest.status == true %>">
+            <%= quest.title %>
+        </p>
+        
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2"> 
+        <!-- Checkbox -->
+        <%= form_with url: quest_path(quest), method: :patch, data: { turbo_frame: dom_id(quest) } do %>
+            <%= hidden_field_tag "status", "0" %>
+            <%= check_box_tag "status", "1", quest.status, onchange: "this.form.submit();", class: "w-5 h-5 mt-1" %>
+        <% end %>
+
+        <!-- Delete Button -->
+        <%= button_to quest_path(quest),
+                        method: :delete,
+                        class: "text-red-500 text-xl" do %>
+            🗑️
+        <% end %>
+    </div>
+
+  </div>
+<% end %>

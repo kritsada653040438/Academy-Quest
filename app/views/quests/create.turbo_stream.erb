@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "quest_form" do %>
+  <%= render partial: "form", locals: { quest: Quest.new } %>
+<% end %>
+
+<%= turbo_stream.prepend "quest-list" do %>
+  <%= render partial: "quests/quest", locals: { quest: @quest } %>
+<% end %>
