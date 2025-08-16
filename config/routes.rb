@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   # config/routes.rb
   root "quests#index"
   resources :quests, only: [ :index, :create, :update, :destroy ]
-  resource :brag_document, only: [:show]
+  resource :brag_document, only: [ :show ]
 end
