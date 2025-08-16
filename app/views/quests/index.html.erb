@@ -1,16 +1,18 @@
-<div>
-  <h1 class="text-2xl font-bold mb-4">🎯 My Academy Quest</h1>
-  <%= turbo_frame_tag "quest_form" do %>
-    <%= render "form", quest: @quest %>
-  <% end %>
+<div class="bg-white rounded-lg shadow-md p-6">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">🎯 My Academy Quests</h1>
+  
+  <div class="mb-6">
+    <%= turbo_frame_tag "quest_form" do %>
+      <%= render "form", quest: @quest %>
+    <% end %>
+  </div>
+
   <div id="quest-list">
     <%= turbo_stream_from "quests" %>
     <%= render @quests %>
   </div>
-  <div class="container mx-auto px-6 py-4">
-    <div class="mt-4 md:mt-0">
-      <%= link_to "Brag Document", brag_document_path, class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600" %>
-    </div>
+  <div class="mx-auto px-6 py-4">
+    <%= link_to "Brag Document", brag_document_path, class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600" %>
   </div>
 </div>
 
