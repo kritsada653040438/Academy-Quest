@@ -1,9 +1,9 @@
 # app/controllers/quests_controller.rb
 class QuestsController < ApplicationController
   before_action :set_quest, only: [ :update, :destroy ]
+  before_action :load_quests, only: [ :index, :create ]
 
   def index
-    @quests = Quest.order(created_at: :desc)
     @quest = Quest.new
   end
 
@@ -41,6 +41,10 @@ end
 
   def set_quest
     @quest = Quest.find(params[:id])
+  end
+
+  def load_quests
+    @quests = Quest.order(created_at: :desc)
   end
 
   def quest_params
