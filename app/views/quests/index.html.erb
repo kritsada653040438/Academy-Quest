@@ -1,18 +1,71 @@
-<div class="bg-white rounded-lg shadow-md p-6">
-  <h1 class="text-3xl font-bold mb-6 text-gray-800">🎯 My Academy Quests</h1>
-  
-  <div class="mb-6">
-    <%= turbo_frame_tag "quest_form" do %>
-      <%= render "form", quest: @quest %>
-    <% end %>
-  </div>
+<div class="min-h-screen bg-gray-50">
+  <div class="container mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h1 class="text-3xl font-bold mb-6 text-gray-800">🎯 My Academy Quests</h1>
+      
+      <!-- Quest Form -->
+      <div class="mb-6">
+        <%= turbo_frame_tag "quest_form" do %>
+          <%= render "form", quest: @quest %>
+        <% end %>
+      </div>
 
-  <div id="quest-list">
-    <%= turbo_stream_from "quests" %>
-    <%= render @quests %>
-  </div>
-  <div class="mx-auto px-6 py-4">
-    <%= link_to "Brag Document", brag_document_path, class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600" %>
+      <!-- Simple Stats -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="text-center p-4 bg-blue-50 rounded-lg">
+          <div class="text-2xl font-bold text-blue-600"><%= @quests.count %></div>
+          <div class="text-sm text-gray-600">Total</div>
+        </div>
+        <div class="text-center p-4 bg-green-50 rounded-lg">
+          <div class="text-2xl font-bold text-green-600"><%= @quests.select(&:status).count %></div>
+          <div class="text-sm text-gray-600">Completed</div>
+        </div>
+        <div class="text-center p-4 bg-orange-50 rounded-lg">
+          <div class="text-2xl font-bold text-orange-600"><%= @quests.reject(&:status).count %></div>
+          <div class="text-sm text-gray-600">Active</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quest List -->
+    <div id="quest-list">
+      <%= turbo_stream_from "quests" %>
+      
+      <!-- Active Quests -->
+      <% if @quests.reject(&:status).any? %>
+        <div class="mb-6">
+          <h2 class="text-xl font-semibold mb-3 text-gray-700">🚀 Active Quests</h2>
+          <%= render @quests.reject(&:status) %>
+        </div>
+      <% end %>
+      
+      <!-- Completed Quests -->
+      <% if @quests.select(&:status).any? %>
+        <div class="mb-6">
+          <h2 class="text-xl font-semibold mb-3 text-gray-500">✅ Completed Quests</h2>
+          <div class="opacity-75">
+            <%= render @quests.select(&:status) %>
+          </div>
+        </div>
+      <% end %>
+      
+      <!-- Empty State -->
+      <% if @quests.empty? %>
+        <div class="text-center py-12">
+          <div class="text-4xl mb-4">🎯</div>
+          <h3 class="text-xl font-semibold text-gray-600 mb-2">No quests yet</h3>
+          <p class="text-gray-500">Create your first quest above!</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Brag Document Link -->
+    <div class="text-center space-x-4">
+      <%= link_to "📖 My brag document", brag_document_path, 
+          class: "inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" %>
+    </div>
+
   </div>
 </div>
-
