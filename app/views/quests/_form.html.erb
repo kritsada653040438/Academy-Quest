@@ -1,4 +1,4 @@
-<%= form_with model: quest, data: { turbo_frame: "quest_form" }, class: "flex mb-4 space-x-2" do |f| %>
+<%= form_with model: quest, data: { turbo_frame: "quest_form" }, class: "flex flex-col sm:flex-row mb-4 space-y-2 sm:space-y-0 sm:space-x-2" do |f| %>
   <%= f.text_field :title, placeholder: "Add my quest list", class: "flex-grow rounded px-3 py-2 border border-gray-300" %>
     <%= f.hidden_field :status, value: false %>
   <%= f.submit "➕", class: "bg-blue-600 text-white px-4 py-2 rounded-full" %>

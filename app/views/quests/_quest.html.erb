@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(quest) do %>
-  <div class="flex items-start justify-between bg-white rounded-xl p-4 shadow mb-3">
+  <div class="flex items-start justify-between bg-white rounded-xl p-4 shadow mb-3 flex-wrap">
 
     <!-- เควสฝั่งซ้าย -->
     <div class="flex items-start space-x-3">
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="flex items-center space-x-2"> 
+    <div class="flex items-center space-x-2 mt-4 sm:mt-0"> 
         <!-- Checkbox -->
         <%= form_with url: quest_path(quest), method: :patch, data: { turbo_frame: dom_id(quest) } do %>
             <%= hidden_field_tag "status", "0" %>
