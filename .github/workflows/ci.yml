@@ -79,11 +79,23 @@ jobs:
         run: |
           bin/rails db:create db:schema:load
 
-      - name: Run RSpec tests
+      - name: Run unit test
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bundle exec rspec
+        run: bundle exec rspec spec/models
+
+      - name: Run Request test
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bundle exec rspec spec/requests
+
+      - name: Run End-to-End test
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bundle exec rspec spec/features
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
