@@ -16,7 +16,7 @@ RSpec.feature "BragDocuments", type: :feature do
 
   scenario "user visits brag document page and sees completed quests" do
     # สร้าง test data
-    completed_quest = Quest.create!(title: "Finished Quest", status: true, updated_at: 2.days.ago)
+    Quest.create!(title: "Finished Quest", status: true, updated_at: 2.days.ago)
 
     # ไปที่หน้า brag document
     visit brag_document_path
